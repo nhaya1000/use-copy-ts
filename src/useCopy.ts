@@ -4,8 +4,8 @@
  * @license MIT
  */
 
-import { useState, useCallback, useEffect, useRef } from 'react';
-import type { UseCopyOptions, UseCopyReturn } from './types';
+import { useState, useCallback, useEffect, useRef } from "react";
+import type { UseCopyOptions, UseCopyReturn } from "./types";
 
 /**
  * React hook for copying text to clipboard with enhanced features
@@ -67,7 +67,7 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
   // Check if Clipboard API is supported in the current environment
   // Requires: navigator.clipboard and secure context (HTTPS or localhost)
   const isSupported =
-    typeof navigator !== 'undefined' &&
+    typeof navigator !== "undefined" &&
     !!navigator.clipboard &&
     !!window.isSecureContext;
 
@@ -86,7 +86,7 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
   const clear = useCallback(async (): Promise<boolean> => {
     // Early return if Clipboard API is not supported
     if (!isSupported) {
-      const err = new Error('Clipboard API is not supported');
+      const err = new Error("Clipboard API is not supported");
       setError(err);
       onError?.(err);
       return false;
@@ -94,7 +94,7 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
 
     try {
       // Clear clipboard by writing empty string
-      await navigator.clipboard.writeText('');
+      await navigator.clipboard.writeText("");
 
       // Reset all state
       reset();
@@ -103,7 +103,7 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
     } catch (err) {
       // Handle clear operation errors
       const error =
-        err instanceof Error ? err : new Error('Failed to clear clipboard');
+        err instanceof Error ? err : new Error("Failed to clear clipboard");
       setError(error);
       onError?.(error);
       return false;
@@ -115,7 +115,7 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
     async (text: string): Promise<boolean> => {
       // Early return if Clipboard API is not supported
       if (!isSupported) {
-        const err = new Error('Clipboard API is not supported');
+        const err = new Error("Clipboard API is not supported");
         setError(err);
         onError?.(err);
         return false;
