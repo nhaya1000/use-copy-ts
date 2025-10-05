@@ -10,7 +10,7 @@ export default defineConfig({
       name: 'UseCopyTs',
       formats: ['es', 'cjs'],
       fileName: (format) =>
-        `index.${format === 'es' ? 'esm' : ''}${format === 'cjs' ? '' : '.'}js`,
+        format === 'es' ? 'index.esm.js' : 'index.js',
     },
     rollupOptions: {
       external: ['react'],
