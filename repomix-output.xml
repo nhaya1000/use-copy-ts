@@ -1,0 +1,1445 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+examples/
+  basic/
+    src/
+      App.tsx
+      main.tsx
+    index.html
+    package.json
+    tsconfig.json
+    vite.config.ts
+src/
+  index.ts
+  types.ts
+  useCopy.ts
+tests/
+  setup.ts
+.editorconfig
+.gitignore
+.prettierignore
+.prettirerrc
+CHANGELOG.md
+CONTRIBUTING.md
+eslint.config.mjs
+LICENSE
+package.json
+README.md
+SECURITY.md
+tsconfig.build.json
+tsconfig.json
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="examples/basic/src/App.tsx">
+import { useState } from "react";
+import { useCopy } from "use-copy-ts";
+
+export default function App() {
+  const { copy, copied, copiedText, reset, clear } = useCopy();
+  const [textareaValue, setTextareaValue] = useState("try writing here");
+
+  const buttonStyle = {
+    padding: "0.5rem 1rem",
+    fontSize: "1rem",
+    cursor: "pointer",
+    color: "white",
+    border: "none",
+    marginRight: "1rem",
+    borderRadius: "0.375rem",
+    transition: "background-color 0.2s",
+  };
+
+  const stateStyle = {
+    color: "#374151",
+  };
+
+  return (
+    <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
+      <h1>use-copy-ts - Basic Example</h1>
+      <h2>State:</h2>
+      <div style={{ marginLeft: "1rem" }}>
+        <p>
+          copied:{" "}
+          <span style={{ ...stateStyle }}>{copied ? "true" : "false"}</span>
+        </p>
+        <p>
+          copiedText:{" "}
+          <span style={{ ...stateStyle }}>{copiedText ?? "null"}</span>
+        </p>
+      </div>
+      <h2>Actions:</h2>
+      <div style={{ marginLeft: "1rem" }}>
+        <button
+          onClick={() => copy("Hello World")}
+          style={{
+            ...buttonStyle,
+            backgroundColor:
+              copied && copiedText === "Hello World" ? "#10b981" : "#3b82f6",
+          }}
+        >
+          {copied ? "Copied! ✓" : 'Copy "Hello World"'}
+        </button>
+        <p style={{ marginTop: "0.5rem", color: "#6b7280" }}>
+          Click the button to copy text to clipboard
+        </p>
+        <textarea
+          value={textareaValue}
+          onChange={(e) => setTextareaValue(e.target.value)}
+          placeholder="try writing here"
+        />
+        <div>
+          <button
+            style={{
+              ...buttonStyle,
+              backgroundColor:
+                copied && copiedText === textareaValue ? "#10b981" : "#3b82f6",
+            }}
+            onClick={() => copy(textareaValue)}
+          >
+            copy textarea
+          </button>
+        </div>
+        <div style={{ marginTop: "1rem" }}>
+          <button
+            onClick={reset}
+            style={{
+              ...buttonStyle,
+              backgroundColor: "#ef4444",
+            }}
+          >
+            Reset State
+          </button>
+          <button
+            onClick={clear}
+            style={{
+              ...buttonStyle,
+              backgroundColor: "#ef4444",
+            }}
+          >
+            Clear State and Clipboard
+          </button>
+        </div>
+      </div>
+      <h2>Try Pasting:</h2>
+
+      <textarea
+        style={{
+          width: "100%",
+          height: "100px",
+          marginTop: "1rem",
+        }}
+        placeholder="Try pasting here (Ctrl+V or Cmd+V)"
+      />
+    </div>
+  );
+}
+</file>
+
+<file path="examples/basic/src/main.tsx">
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
+</file>
+
+<file path="examples/basic/index.html">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>use-copy-ts - Basic Example</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+</file>
+
+<file path="examples/basic/package.json">
+{
+  "name": "use-copy-ts-example-basic",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "typescript": "^5.2.0",
+    "vite": "^5.0.0"
+  }
+}
+</file>
+
+<file path="examples/basic/tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "use-copy-ts": ["../../src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}
+</file>
+
+<file path="examples/basic/vite.config.ts">
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import path from "path";
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      // eslint-disable-next-line no-undef
+      "use-copy-ts": path.resolve(__dirname, "../../src"),
+    },
+  },
+});
+</file>
+
+<file path="src/index.ts">
+/**
+ * @fileoverview Main entry point for use-copy-ts library
+ * @author nhaya1000
+ * @license MIT
+ */
+
+// Export the main hook
+export { useCopy } from "./useCopy";
+
+// Export TypeScript types for consumers
+export type { UseCopyOptions, UseCopyReturn } from "./types";
+</file>
+
+<file path="src/types.ts">
+/**
+ * Configuration options for the useCopy hook
+ */
+export interface UseCopyOptions {
+  /**
+   * Time in milliseconds before automatically resetting the copied state
+   * @default 2000
+   */
+  timeout?: number;
+
+  /**
+   * Callback function called when copy operation succeeds
+   * @param text - The text that was successfully copied
+   */
+  onSuccess?: (text: string) => void;
+
+  /**
+   * Callback function called when copy operation fails
+   * @param error - The error that occurred during the copy operation
+   */
+  onError?: (error: Error) => void;
+}
+
+/**
+ * Return value interface for the useCopy hook
+ */
+export interface UseCopyReturn {
+  /**
+   * Function to copy text to clipboard
+   * @param text - The text to copy
+   * @returns Promise that resolves to true if successful, false otherwise
+   */
+  copy: (text: string) => Promise<boolean>;
+
+  /**
+   * Boolean indicating if text was recently copied (auto-resets after timeout)
+   */
+  copied: boolean;
+
+  /**
+   * The most recently copied text, or null if nothing has been copied
+   */
+  copiedText: string | null;
+
+  /**
+   * Error object if the last copy operation failed, null otherwise
+   */
+  error: Error | null;
+
+  /**
+   * Boolean indicating if the Clipboard API is supported in the current environment
+   */
+  isSupported: boolean;
+
+  /**
+   * Function to manually reset the copied state and clear any errors
+   */
+  reset: () => void;
+
+  /**
+   * Function to clear the clipboard contents
+   * @returns Promise that resolves to true if successful, false otherwise
+   */
+  clear: () => Promise<boolean>;
+}
+</file>
+
+<file path="src/useCopy.ts">
+/**
+ * @fileoverview React hook for clipboard operations with TypeScript support
+ * @author nhaya1000
+ * @license MIT
+ */
+
+import { useState, useCallback, useEffect, useRef } from "react";
+import type { UseCopyOptions, UseCopyReturn } from "./types";
+
+/**
+ * React hook for copying text to clipboard with enhanced features
+ *
+ * Features:
+ * - Type-safe clipboard operations
+ * - Auto-reset copied state after configurable timeout
+ * - Error handling with detailed error information
+ * - Success/error callbacks
+ * - Clipboard API support detection
+ * - Manual state reset functionality
+ * - Clipboard clear functionality
+ *
+ * @param options - Configuration options for the hook
+ * @param options.timeout - Time in milliseconds before auto-reset (default: 2000)
+ * @param options.onSuccess - Callback called on successful copy
+ * @param options.onError - Callback called on copy error
+ *
+ * @returns Object containing copy function and state
+ *
+ * @example
+ * ```tsx
+ * function MyComponent() {
+ *   const { copy, copied, error, isSupported, clear } = useCopy({
+ *     timeout: 3000,
+ *     onSuccess: (text) => console.log('Copied:', text),
+ *     onError: (err) => console.error('Copy failed:', err)
+ *   });
+ *
+ *   if (!isSupported) {
+ *     return <div>Clipboard not supported</div>;
+ *   }
+ *
+ *   return (
+ *     <div>
+ *       <button onClick={() => copy('Hello World')}>
+ *         {copied ? 'Copied!' : 'Copy Text'}
+ *       </button>
+ *       <button onClick={() => clear()}>
+ *         Clear Clipboard
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ */
+export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
+  const { timeout = 2000, onSuccess, onError } = options;
+
+  // State to track if text was recently copied
+  const [copied, setCopied] = useState(false);
+  // Store the most recently copied text
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+  // Store any error that occurred during copy operation
+  const [error, setError] = useState<Error | null>(null);
+  // Reference to timeout for auto-reset functionality
+  const timeoutIdRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Check if Clipboard API is supported in the current environment
+  // Requires: navigator.clipboard and secure context (HTTPS or localhost)
+  const isSupported =
+    typeof navigator !== "undefined" &&
+    !!navigator.clipboard &&
+    !!window.isSecureContext;
+
+  // Function to reset all state and clear any pending timeouts
+  const reset = useCallback(() => {
+    setCopied(false);
+    setCopiedText(null);
+    setError(null);
+    if (timeoutIdRef.current) {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+    }
+  }, []);
+
+  // Function to clear clipboard contents
+  const clear = useCallback(async (): Promise<boolean> => {
+    // Early return if Clipboard API is not supported
+    if (!isSupported) {
+      const err = new Error("Clipboard API is not supported");
+      setError(err);
+      onError?.(err);
+      return false;
+    }
+
+    try {
+      // Clear clipboard by writing empty string
+      await navigator.clipboard.writeText("");
+
+      // Reset all state
+      reset();
+
+      return true;
+    } catch (err) {
+      // Handle clear operation errors
+      const error = err instanceof Error ? err : new Error("Failed to clear clipboard");
+      setError(error);
+      onError?.(error);
+      return false;
+    }
+  }, [isSupported, onError, reset]);
+
+  // Main copy function that handles clipboard operations
+  const copy = useCallback(
+    async (text: string): Promise<boolean> => {
+      // Early return if Clipboard API is not supported
+      if (!isSupported) {
+        const err = new Error("Clipboard API is not supported");
+        setError(err);
+        onError?.(err);
+        return false;
+      }
+
+      try {
+        // Attempt to write text to clipboard
+        await navigator.clipboard.writeText(text);
+
+        // Update state on successful copy
+        setCopied(true);
+        setCopiedText(text);
+        setError(null);
+        onSuccess?.(text);
+
+        // Set timeout to auto-reset copied state
+        if (timeout > 0) {
+          if (timeoutIdRef.current) {
+            clearTimeout(timeoutIdRef.current);
+          }
+          timeoutIdRef.current = setTimeout(() => {
+            setCopied(false);
+          }, timeout);
+        }
+
+        return true;
+      } catch (err) {
+        // Handle copy operation errors
+        const error = err instanceof Error ? err : new Error("Failed to copy");
+        setError(error);
+        setCopied(false);
+        setCopiedText(null);
+        onError?.(error);
+        return false;
+      }
+    },
+    [isSupported, timeout, onSuccess, onError],
+  );
+
+  // Cleanup timeout on component unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutIdRef.current) {
+        clearTimeout(timeoutIdRef.current);
+      }
+    };
+  }, []);
+
+  return {
+    copy,
+    copied,
+    copiedText,
+    error,
+    isSupported,
+    reset,
+    clear,
+  };
+}
+</file>
+
+<file path="tests/setup.ts">
+// Test setup file
+// This file runs before each test suite
+
+// Add custom matchers or global test utilities here
+export {};
+</file>
+
+<file path=".editorconfig">
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
+
+[package.json]
+indent_size = 2
+</file>
+
+<file path=".prettierignore">
+node_modules
+dist
+coverage
+*.md
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.github
+</file>
+
+<file path=".prettirerrc">
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "bracketSpacing": true,
+  "jsxSingleQuote": false,
+  "quoteProps": "as-needed"
+}
+</file>
+
+<file path="CHANGELOG.md">
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+### Added
+- Initial release of use-copy-ts
+- TypeScript support with comprehensive type definitions
+- React hook for clipboard operations
+- Auto-reset functionality with configurable timeout
+- Error handling with detailed error information
+- Clipboard API support detection
+- Success and error callbacks
+- Manual state reset functionality
+
+### Features
+- `useCopy` hook for clipboard operations
+- Support for modern Clipboard API
+- TypeScript definitions for better developer experience
+- Configurable timeout for auto-reset
+- Error handling and success callbacks
+
+## [0.1.0] - 2025-10-04
+
+### Added
+- Initial project setup
+- Core functionality implementation
+- TypeScript configuration
+- ESLint and Prettier setup
+- Basic documentation
+</file>
+
+<file path="CONTRIBUTING.md">
+# Contributing to use-copy-ts
+
+We welcome contributions to use-copy-ts! This document provides guidelines for contributing to this project.
+
+## Getting Started
+
+1. Fork the repository
+2. Clone your fork locally
+3. Install dependencies: `npm install`
+4. Create a new branch for your feature/fix: `git checkout -b feature/your-feature-name`
+
+## Development Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Run development mode (watch TypeScript compilation)
+npm run dev
+
+# Run tests
+npm run test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run linting
+npm run lint
+
+# Run type checking
+npm run typecheck
+
+# Run all checks (recommended before committing)
+npm run check
+```
+
+## Code Style
+
+- Use TypeScript for all code
+- Follow the existing code style (enforced by ESLint and Prettier)
+- Add appropriate JSDoc comments for public APIs
+- Write tests for new functionality
+- Ensure all tests pass before submitting
+
+## Testing
+
+- Write unit tests for new features using Jest
+- Ensure all existing tests continue to pass
+- Aim for good test coverage
+
+## Pull Request Process
+
+1. Ensure your code follows the project's style guidelines
+2. Add tests for new functionality
+3. Update documentation if needed
+4. Make sure all checks pass: `npm run check`
+5. Create a clear, descriptive pull request
+
+## Commit Messages
+
+Use clear, descriptive commit messages:
+- `feat: add new feature`
+- `fix: resolve bug`
+- `docs: update documentation`
+- `test: add tests`
+- `refactor: improve code structure`
+
+## Issues
+
+When reporting issues, please include:
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Environment details (browser, React version, etc.)
+
+## Questions?
+
+If you have questions about contributing, feel free to open an issue for discussion.
+
+Thank you for contributing!
+</file>
+
+<file path="eslint.config.mjs">
+import js from "@eslint/js";
+import typescript from "@typescript-eslint/eslint-plugin";
+import typescriptParser from "@typescript-eslint/parser";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import prettier from "eslint-config-prettier";
+
+export default [
+  {
+    ignores: [
+      "node_modules/**",
+      "dist/**",
+      "coverage/**",
+      "*.config.js",
+      "*.config.ts",
+      ".github/**",
+      "examples/**/dist/**",
+      "examples/**/node_modules/**",
+    ],
+  },
+  js.configs.recommended,
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        // Browser globals
+        window: "readonly",
+        document: "readonly",
+        navigator: "readonly",
+        console: "readonly",
+        setTimeout: "readonly",
+        clearTimeout: "readonly",
+        setInterval: "readonly",
+        clearInterval: "readonly",
+        // Node.js globals
+        process: "readonly",
+        Buffer: "readonly",
+        NodeJS: "readonly",
+        // ES2020
+        Promise: "readonly",
+        Symbol: "readonly",
+      },
+    },
+    plugins: {
+      "@typescript-eslint": typescript,
+      react: react,
+      "react-hooks": reactHooks,
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+    rules: {
+      ...typescript.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+
+      // Custom rules
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "@typescript-eslint/explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-explicit-any": "error",
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          prefer: "type-imports",
+        },
+      ],
+      "no-console": [
+        "warn",
+        {
+          allow: ["warn", "error"],
+        },
+      ],
+    },
+  },
+  {
+    files: ["**/*.test.{ts,tsx}", "tests/**/*"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
+  prettier,
+];
+</file>
+
+<file path="LICENSE">
+MIT License
+
+Copyright (c) 2025 nhaya1000
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</file>
+
+<file path="package.json">
+{
+  "name": "use-copy-ts",
+  "version": "0.1.0",
+  "description": "Type-safe React hook for clipboard operations",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc --project tsconfig.build.json",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src tests --ext .ts,.tsx",
+    "lint:fix": "eslint src tests --ext .ts,.tsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"tests/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run lint && npm run format:check",
+    "prepublishOnly": "npm run check && npm run build && npm run test"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "clipboard",
+    "copy",
+    "typescript"
+  ],
+  "author": "nhaya1000 <79636369+nhaya1000@users.noreply.github.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.2",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^6.1.1",
+    "prettier": "^3.6.2",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.9.3"
+  },
+  "workspaces": [
+    ".",
+    "examples/*"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nhaya1000/use-copy-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nhaya1000/use-copy-ts/issues"
+  },
+  "homepage": "https://github.com/nhaya1000/use-copy-ts#readme"
+}
+</file>
+
+<file path="README.md">
+# use-copy-ts# use-copy-ts
+
+
+
+[![npm version](https://badge.fury.io/js/use-copy-ts.svg)](https://badge.fury.io/js/use-copy-ts)Type-safe React hook for clipboard operations.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)## Installation
+
+
+
+Type-safe React hook for clipboard operations with enhanced features.```bash
+
+npm install use-copy-ts
+
+## Features```
+
+
+
+- 🔒 **Type-safe**: Full TypeScript support with comprehensive type definitions## Quick Start
+
+- 📋 **Modern Clipboard API**: Uses the latest Clipboard API for secure operations```typescript
+
+- ⏱️ **Auto-reset**: Configurable timeout to automatically reset copied stateimport { useCopy } from 'use-copy-ts';
+
+- 🎯 **Error Handling**: Detailed error information with custom error callbacks
+
+- 🔍 **Support Detection**: Automatic detection of Clipboard API supportfunction MyComponent() {
+
+- 🎨 **Flexible**: Success and error callbacks for custom handling  const { copy, copied } = useCopy();
+
+- 🧹 **Clean**: Manual state reset functionality
+
+  return (
+
+## Installation    <button onClick={() => copy('Hello World')}>
+
+      {copied ? 'Copied!' : 'Copy'}
+
+```bash    </button>
+
+npm install use-copy-ts  );
+
+```}
+
+
+## Quick Start
+
+```typescript
+import { useCopy } from 'use-copy-ts';
+
+function MyComponent() {
+  const { copy, copied } = useCopy();
+
+  return (
+    <button onClick={() => copy('Hello World')}>
+      {copied ? 'Copied!' : 'Copy'}
+    </button>
+  );
+}
+```
+
+## API Reference
+
+### `useCopy(options?)`
+
+#### Parameters
+
+- `options` (optional): Configuration object
+
+```typescript
+interface UseCopyOptions {
+  timeout?: number; // Auto-reset timeout in milliseconds (default: 2000)
+  onSuccess?: (text: string) => void; // Success callback
+  onError?: (error: Error) => void; // Error callback
+}
+```
+
+#### Returns
+
+```typescript
+interface UseCopyReturn {
+  copy: (text: string) => Promise<boolean>; // Copy function
+  copied: boolean; // Whether text was recently copied
+  copiedText: string | null; // Most recently copied text
+  error: Error | null; // Last error, if any
+  isSupported: boolean; // Whether Clipboard API is supported
+  reset: () => void; // Manual reset function
+}
+```
+
+## Examples
+
+### Basic Usage
+
+```typescript
+import { useCopy } from 'use-copy-ts';
+
+function CopyButton() {
+  const { copy, copied, error } = useCopy();
+
+  const handleCopy = () => {
+    copy('Text to copy');
+  };
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return (
+    <button onClick={handleCopy}>
+      {copied ? 'Copied!' : 'Copy Text'}
+    </button>
+  );
+}
+```
+
+### Advanced Usage with Callbacks
+
+```typescript
+import { useCopy } from 'use-copy-ts';
+
+function AdvancedCopyButton() {
+  const { copy, copied, copiedText, isSupported } = useCopy({
+    timeout: 3000, // Reset after 3 seconds
+    onSuccess: (text) => {
+      console.log('Successfully copied:', text);
+    },
+    onError: (error) => {
+      console.error('Copy failed:', error);
+    }
+  });
+
+  if (!isSupported) {
+    return <div>Clipboard not supported in this browser</div>;
+  }
+
+  return (
+    <div>
+      <button onClick={() => copy('Hello World')}>
+        Copy Text
+      </button>
+      {copied && <p>Copied: {copiedText}</p>}
+    </div>
+  );
+}
+```
+
+### Copy Code Snippet
+
+```typescript
+import { useCopy } from 'use-copy-ts';
+
+function CodeBlock({ code }: { code: string }) {
+  const { copy, copied, reset } = useCopy({
+    timeout: 2000,
+    onSuccess: () => {
+      // Show toast notification
+    }
+  });
+
+  return (
+    <div className="code-block">
+      <pre>{code}</pre>
+      <div className="code-actions">
+        <button onClick={() => copy(code)}>
+          {copied ? '✓ Copied' : '📋 Copy'}
+        </button>
+        <button onClick={reset}>Reset</button>
+      </div>
+    </div>
+  );
+}
+```
+
+### Share URL
+
+```typescript
+import { useCopy } from 'use-copy-ts';
+
+function ShareButton() {
+  const { copy, copied } = useCopy({
+    onSuccess: () => {
+      // Analytics tracking
+      analytics.track('url_shared');
+    }
+  });
+
+  const shareCurrentPage = () => {
+    copy(window.location.href);
+  };
+
+  return (
+    <button onClick={shareCurrentPage}>
+      {copied ? 'URL Copied!' : 'Share Page'}
+    </button>
+  );
+}
+```
+
+## Browser Support
+
+This hook uses the modern [Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard) which requires:
+
+- **HTTPS** (or localhost for development)
+- **Modern browsers** that support the Clipboard API
+
+### Supported Browsers
+
+- Chrome 66+
+- Firefox 63+
+- Safari 13.1+
+- Edge 79+
+
+The hook automatically detects support via the `isSupported` property.
+
+## Requirements
+
+- React 16.8+ (hooks support)
+- TypeScript 4.0+ (if using TypeScript)
+
+## Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## License
+
+MIT © [nhaya1000](https://github.com/nhaya1000)
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for details about changes in each version.
+</file>
+
+<file path="SECURITY.md">
+# Security Policy
+
+## Supported Versions
+We actively support the latest minor of `use-copy-ts`.
+
+| Version | Supported |
+|--------:|:---------:|
+| 0.x.x   | ✅        |
+
+> Policy: We generally support only the **latest released 0.x**. When a new 0.x is released, the previous minor may be supported for up to 30 days for critical fixes.
+
+---
+
+## Reporting a Vulnerability
+
+### Private Channels (preferred)
+- **GitHub Security Advisory (Private):** Create a draft advisory in this repo.
+- **Email:** security@your-domain.example  
+  (Optionally) PGP: `FINGERPRINT HERE`, key: https://your-domain.example/pgp.txt
+
+Please include:
+- A clear **description** and **security impact**
+- **Steps to reproduce** (minimal repro code if possible)
+- **Environment**: OS, Browser (and version), Node/React versions, package version
+- Any **workarounds/mitigations** you found
+
+**Do NOT** open public issues for vulnerabilities.
+
+### Our Triage & Timeline (SLO)
+- **Ack**: within **48 hours**
+- **Initial assessment**: within **7 days**
+- **Fix targets** (guideline):
+  - Critical: patch within **7 days**
+  - High: within **14 days**
+  - Medium: next scheduled release
+  - Low: best effort
+
+We’ll keep you updated through the private advisory or email.
+
+---
+
+## Coordinated Disclosure
+
+- We ask that you **withhold public disclosure** until a fix is released and users have had a reasonable update window.
+- After release, we will publish a **GitHub Security Advisory (GHSA)** and, when applicable, request a **CVE**.
+- We can **credit reporters** (with permission). If you prefer to remain anonymous, we will respect that.
+- No bounty program at this time.
+
+---
+
+## Scope
+
+### In Scope
+- Vulnerabilities in this repository’s source and published npm package(s)
+- Build artifacts we publish (`dist/*`)
+
+### Out of Scope
+- Denial of Service via excessive usage patterns in consumer apps
+- Social engineering, physical attacks, issues in **third-party** services or dependencies
+- Vulnerabilities requiring privileged or local system access beyond normal package usage
+
+---
+
+## Security Considerations for Clipboard
+
+This library wraps Clipboard operations and therefore:
+
+- **Secure Context**: Most browsers require HTTPS or `http://localhost`.
+- **User Activation/Permission**: Some environments require a user gesture and/or permission; calls may **reject** if not satisfied.
+- **Privacy**: Avoid placing secrets (tokens/passwords) on the clipboard; consider redaction.
+- **Fallbacks**: Environments may lack `navigator.clipboard`. Consumers should handle **graceful failure** and inform users.
+
+Browser behavior varies (e.g., iOS/Safari). Always implement **error handling** and **feature detection**.
+
+---
+
+## Supply Chain & Releases
+
+- We publish release notes and prefer **signed tags** and **provenance-enabled** npm releases when possible.
+- We track and patch known-vulnerable dependencies in a timely manner.
+- If you find a supply-chain issue (typosquatting, compromised dependency, etc.), please use the private channels above.
+
+---
+
+## Reporter Hall of Fame
+
+We’re happy to acknowledge reporters after coordinated disclosure (opt-in). Thank you for helping keep `use-copy-ts` secure!
+</file>
+
+<file path="tsconfig.build.json">
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "tests",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
+}
+</file>
+
+<file path="tsconfig.json">
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
+</file>
+
+<file path=".gitignore">
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for instrumented libs generated by jscoverage/JSCover
+lib-cov
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Snowpack dependency directory (https://snowpack.dev/)
+web_modules/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
+
+# Next.js build output
+.next
+out
+
+# Nuxt.js build / generate output
+.nuxt
+dist
+
+# Gatsby files
+.cache/
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+.vuepress/dist
+
+# vuepress v2.x temp and cache directory
+.temp
+.cache
+
+# Sveltekit cache directory
+.svelte-kit/
+
+# vitepress build output
+**/.vitepress/dist
+
+# vitepress cache directory
+**/.vitepress/cache
+
+# Docusaurus cache and generated files
+.docusaurus
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+# Firebase cache directory
+.firebase/
+
+# TernJS port file
+.tern-port
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+# yarn v3
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Vite logs files
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+</file>
+
+</files>
