@@ -7,16 +7,16 @@
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 
-Type-safe React hook for clipboard operations with enhanced features.```bash
+Type-safe React hook for clipboard operations with enhanced features.
 
-## Features```
+## Features
 
-- 🔒 **Type-safe**: Full TypeScript support with comprehensive type definitions## Quick Start
-- 📋 **Modern Clipboard API**: Uses the latest Clipboard API for secure operations```typescript
-- ⏱️ **Auto-reset**: Configurable timeout to automatically reset copied stateimport { useCopy } from 'use-copy-ts';
+- 🔒 **Type-safe**: Full TypeScript support with comprehensive type definitions
+- 📋 **Modern Clipboard API**: Uses the latest Clipboard API for secure operations
+- ⏱️ **Auto-reset**: Configurable timeout to automatically reset copied state
 - 🎯 **Error Handling**: Detailed error information with custom error callbacks
-- 🔍 **Support Detection**: Automatic detection of Clipboard API supportfunction MyComponent() {
-- 🎨 **Flexible**: Success and error callbacks for custom handling  const { copy, copied } = useCopy();
+- 🔍 **Support Detection**: Automatic detection of Clipboard API support
+- 🎨 **Flexible**: Success and error callbacks for custom handling
 - 🧹 **Clean**: Manual state reset functionality
 
 
