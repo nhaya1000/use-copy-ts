@@ -103,7 +103,9 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
     } catch (err) {
       // Handle clear operation errors
       const error =
-        err instanceof Error ? err : new Error("Failed to clear clipboard");
+        err instanceof Error
+          ? err
+          : new Error("Failed to clear clipboard. " + String(err));
       setError(error);
       onError?.(error);
       return false;
@@ -144,7 +146,10 @@ export function useCopy(options: UseCopyOptions = {}): UseCopyReturn {
         return true;
       } catch (err) {
         // Handle copy operation errors
-        const error = err instanceof Error ? err : new Error(String(err));
+        const error =
+          err instanceof Error
+            ? err
+            : new Error("Failed to copy text. " + String(err));
         setError(error);
         setCopied(false);
         setCopiedText(null);

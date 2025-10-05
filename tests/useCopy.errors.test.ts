@@ -99,7 +99,9 @@ describe("useCopy - Error Handling", () => {
     });
 
     expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toBe("String error");
+    expect(result.current.error?.message).toBe(
+      "Failed to copy text. String error"
+    );
   });
 
   test("should handle clear operation errors", async () => {
@@ -188,6 +190,8 @@ describe("useCopy - Error Handling", () => {
     });
 
     expect(result.current.error).toBeInstanceOf(Error);
-    expect(result.current.error?.message).toBe("Failed to clear clipboard");
+    expect(result.current.error?.message).toBe(
+      "Failed to clear clipboard. String error in clear"
+    );
   });
 });
