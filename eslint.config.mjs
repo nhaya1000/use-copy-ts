@@ -92,8 +92,23 @@ export default [
   },
   {
     files: ["**/*.test.{ts,tsx}", "tests/**/*"],
+    languageOptions: {
+      globals: {
+        // Jest globals
+        jest: "readonly",
+        describe: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        it: "readonly",
+      },
+    },
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-namespace": "off",
     },
   },
   prettier,
